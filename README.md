@@ -111,7 +111,3 @@ Each task includes comprehensive tests demonstrating the required functionality:
 
 - **Task 1 & 2**: Python 3.7+
 - **Task 3**: GHC 8.6+ (Haskell)
-
-## Assignment Specifications
-
-Full specifications available in the `docs/` directory containing the original PDF requirements.
