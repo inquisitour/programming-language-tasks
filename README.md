@@ -32,17 +32,7 @@ A post-fix notation calculator using stack-based evaluation with programmable ca
 - **Arithmetic**: `+`, `-`, `*`, `/`, `%`
 - **Comparison**: `=`, `<`, `>`
 - **Logic**: `&`, `|`, `_` (null check), `~` (negate)
-- **Stack**: `!` (copy), `# Programming Languages Course (LVA 185.208)
-
-This repository contains implementations for three programming language assignments from TU Wien.
-
-## Overview
-
-**Task 1**: Stack-based Calculator with Post-fix Notation  
-**Task 2**: Functional Language Interpreter  
-**Task 3**: Syntax-aware Editor for Task 2 Language  
-
- (delete), `#` (size)
+- **Stack**: `!` (copy), `$` (delete), `#` (size)
 - **I/O**: `'` (input), `"` (output)
 - **Execution**: `@` (immediate), `\` (deferred)
 
@@ -58,10 +48,6 @@ python calculator.py -i            # Interactive mode
 ```
 📊 Assignment Examples: 8/8 passed
 🧮 All operators: ✅ Working
-📝 String operations: ✅ Working  
-🗂️ All 52 registers: ✅ Present
-🚀 Startup program: ✅ Verified
-```
 📝 String operations: ✅ Working  
 🗂️ All 52 registers: ✅ Present
 🚀 Startup program: ✅ Verified
