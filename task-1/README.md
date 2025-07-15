@@ -315,5 +315,3 @@ python calculator.py -i
 | String analysis | ✅ | Word reversal & counting in register 'b' |
 | Complete operators | ✅ | 20+ operators implemented |
 | Error handling | ✅ | Graceful error messages |
-
-**🚀 Ready for submission and evaluation!**
