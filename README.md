@@ -10,7 +10,7 @@ This repository contains implementations for three programming language assignme
 
 ## Task 1: Programmable Calculator ✅ COMPLETED
 
-**📖 [View Task 1 Documentation](task1/README.md)**
+**📖 [View Task 1 Documentation](task-1/README.md)**
 
 ### Description
 A post-fix notation calculator using stack-based evaluation with programmable capabilities.
