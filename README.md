@@ -55,7 +55,7 @@ python calculator.py -i            # Interactive mode
 
 ## Task 2: Functional Language Interpreter ⏳ PENDING
 
-**📖 [Task 2 Documentation](task2/README.md)** *(Will be created)*
+**📖 [Task 2 Documentation](task-2/README.md)** *(Will be created)*
 
 ### Description
 Interpreter for a dynamically-typed functional language with lambda calculus features.
@@ -84,7 +84,7 @@ sum (range 3 6)
 
 ## Task 3: Syntax-aware Editor ⏳ PENDING
 
-**📖 [Task 3 Documentation](task3/README.md)** *(Will be created)*
+**📖 [Task 3 Documentation](task-3/README.md)** *(Will be created)*
 
 ### Description
 Smart editor for the functional language with syntax highlighting and error detection.
