@@ -10,6 +10,8 @@ This repository contains implementations for three programming language assignme
 
 ## Task 1: Programmable Calculator ✅ COMPLETED
 
+**📖 [View Task 1 Documentation](task1/README.md)**
+
 ### Description
 A post-fix notation calculator using stack-based evaluation with programmable capabilities.
 
@@ -60,8 +62,14 @@ python calculator.py -i            # Interactive mode
 🗂️ All 52 registers: ✅ Present
 🚀 Startup program: ✅ Verified
 ```
+📝 String operations: ✅ Working  
+🗂️ All 52 registers: ✅ Present
+🚀 Startup program: ✅ Verified
+```
 
 ## Task 2: Functional Language Interpreter ⏳ PENDING
+
+**📖 [Task 2 Documentation](task2/README.md)** *(Will be created)*
 
 ### Description
 Interpreter for a dynamically-typed functional language with lambda calculus features.
@@ -90,6 +98,8 @@ sum (range 3 6)
 
 ## Task 3: Syntax-aware Editor ⏳ PENDING
 
+**📖 [Task 3 Documentation](task3/README.md)** *(Will be created)*
+
 ### Description
 Smart editor for the functional language with syntax highlighting and error detection.
 
@@ -112,17 +122,27 @@ Smart editor for the functional language with syntax highlighting and error dete
 │   ├── simple_test.py            # Quick verification
 │   ├── run_tests.bat             # Windows test runner
 │   ├── tests/                    # Test suite
-│   └── README.md                 # Task 1 documentation
+│   │   ├── test_calculator.py    # Unit tests
+│   │   └── run_tests.py         # Test runner
+│   ├── examples/                 # Examples and demos
+│   │   └── string_analysis.py   # String analysis demo
+│   └── README.md                 # 📖 Task 1 detailed documentation
 ├── task2/ ⏳ IN PROGRESS
 │   ├── interpreter.py            # Will be implemented
 │   ├── examples/                 # Example programs
-│   └── README.md                 # Task 2 documentation
+│   └── README.md                 # 📖 Task 2 documentation (TBD)
 ├── task3/ ⏳ PENDING
 │   ├── editor.hs                 # Will be implemented
 │   ├── src/                      # Haskell modules
-│   └── README.md                 # Task 3 documentation
-└── README.md                     # This overview
+│   └── README.md                 # 📖 Task 3 documentation (TBD)
+└── README.md                     # 📖 This overview document
 ```
+
+## Quick Navigation
+
+- **📖 [Task 1: Post-fix Calculator](task1/README.md)** - Complete implementation with full testing
+- **📖 [Task 2: Functional Interpreter](task2/README.md)** - *(To be created)*
+- **📖 [Task 3: Syntax Editor](task3/README.md)** - *(To be created)*
 
 ## Testing
 
