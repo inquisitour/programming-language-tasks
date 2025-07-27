@@ -273,10 +273,10 @@ task2/
 
 ### **Phase 1: Core Interpreter ⏳**
 - [x] Project setup and structure
-- [ ] Lexer implementation
-- [ ] Basic parser (integers, variables)
-- [ ] Simple evaluator
-- [ ] Basic function definition/application
+- [x] Lexer implementation
+- [x] Basic parser (integers, variables)
+- [x] Simple evaluator
+- [x] Basic function definition/application
 
 ### **Phase 2: Advanced Features ⏳**
 - [ ] Record support (lazy/eager)
