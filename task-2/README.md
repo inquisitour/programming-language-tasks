@@ -279,10 +279,10 @@ task2/
 - [x] Basic function definition/application
 
 ### **Phase 2: Advanced Features ⏳**
-- [ ] Record support (lazy/eager)
-- [ ] Built-in functions
-- [ ] Conditional evaluation
-- [ ] Environment management
+- [x] Record support (lazy/eager)
+- [x] Built-in functions
+- [x] Conditional evaluation
+- [x] Environment management
 
 ### **Phase 3: Complete Language ⏳**
 - [ ] Complex nested structures

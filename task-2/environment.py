@@ -8,9 +8,9 @@ class Environment:
             return self.bindings[name]
         if self.parent:
             return self.parent.lookup(name)
-        raise NameError(f'Unbound variable: {name}')
+        raise NameError(f'Unbound var: {name}')
 
-    def extend(self, name, value):
+    def extend(self, name, val):
         new_env = Environment(parent=self)
-        new_env.bindings[name] = value
+        new_env.bindings[name] = val
         return new_env
