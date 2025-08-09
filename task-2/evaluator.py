@@ -1,6 +1,6 @@
 from ast_nodes import Integer, Variable, Lambda, Application, Record, Cond, Access
 from environment import Environment
-from values import IntegerValue, FunctionValue, BuiltinValue, RecordValue, Thunk
+from values import IntegerValue, FunctionValue, BuiltinValue, RecordValue, Thunk, EnvironmentWrapper
 import builtins_lang as bl
 
 class Evaluator:
@@ -35,7 +35,7 @@ class Evaluator:
 
         # Record literal
         if isinstance(node, Record):
-            # Eager: left-to-right
+            # Eager: left-to-right evaluation, extending environment
             if node.eager:
                 record_env = env
                 vals = {}
@@ -44,9 +44,10 @@ class Evaluator:
                     vals[name] = val
                     record_env = record_env.extend(name, val)
                 return RecordValue(env, vals, {}, True)
-            # Lazy: store exprs
-            exprs = {name: expr for name, expr in node.bindings}
-            return RecordValue(env, {}, exprs, False)
+            # Lazy: store expressions
+            else:
+                exprs = {name: expr for name, expr in node.bindings}
+                return RecordValue(env, {}, exprs, False)
 
         # Field access
         if isinstance(node, Access):
@@ -54,9 +55,21 @@ class Evaluator:
             if not isinstance(rv, RecordValue):
                 raise TypeError('Not a record')
             if rv.eager:
+                if node.field not in rv.vals:
+                    raise NameError(f'Field {node.field} not found in record')
                 return rv.vals[node.field]
-            # lazy
-            thunk = Thunk(rv.exprs[node.field], rv.env, self)
+            # lazy evaluation
+            if node.field not in rv.exprs:
+                raise NameError(f'Field {node.field} not found in record')
+            if node.field in rv.vals:
+                return rv.vals[node.field]  # Already computed
+            
+            # Create environment for lazy evaluation
+            lazy_env = Environment(parent=rv.env)
+            for name, expr in rv.exprs.items():
+                lazy_env.bindings[name] = Thunk(expr, lazy_env, self)
+            
+            thunk = Thunk(rv.exprs[node.field], lazy_env, self)
             val = thunk.force()
             rv.vals[node.field] = val
             return val
@@ -64,6 +77,46 @@ class Evaluator:
         # Function/Builtin/Record application
         if isinstance(node, Application):
             func_val = self.eval(node.func, env)
+            
+            # Record application - CREATES ENVIRONMENT WRAPPER
+            if isinstance(func_val, RecordValue):
+                # Create new environment from record
+                new_env = Environment(parent=func_val.env)
+                if func_val.eager:
+                    new_env.bindings.update(func_val.vals)
+                else:
+                    for name, expr in func_val.exprs.items():
+                        new_env.bindings[name] = Thunk(expr, new_env, self)
+                
+                # Evaluate argument in new environment
+                result = self.eval(node.arg, new_env)
+                
+                # If result is a function/builtin, wrap it with the environment
+                if isinstance(result, (BuiltinValue, FunctionValue)):
+                    return EnvironmentWrapper(result, new_env)
+                
+                return result
+            
+            # Environment wrapper - HANDLES WRAPPED FUNCTIONS
+            if isinstance(func_val, EnvironmentWrapper):
+                actual_func = func_val.value
+                wrapper_env = func_val.env
+                
+                if isinstance(actual_func, BuiltinValue):
+                    arg_val = self.eval(node.arg, wrapper_env)  # Use wrapped environment!
+                    if not isinstance(arg_val, IntegerValue):
+                        raise TypeError('Built-in functions require integer args')
+                    args = actual_func.args + [arg_val.value]
+                    if len(args) < actual_func.arity:
+                        new_builtin = BuiltinValue(actual_func.name, actual_func.func, actual_func.arity, args)
+                        return EnvironmentWrapper(new_builtin, wrapper_env)  # Keep wrapping
+                    return IntegerValue(actual_func.func(*args))
+                
+                elif isinstance(actual_func, FunctionValue):
+                    arg_val = self.eval(node.arg, wrapper_env)  # Use wrapped environment!
+                    new_env = actual_func.env.extend(actual_func.param, arg_val)
+                    return self.eval(actual_func.body, new_env)
+            
             # Built-in (curried)
             if isinstance(func_val, BuiltinValue):
                 arg_val = self.eval(node.arg, env)
@@ -74,22 +127,12 @@ class Evaluator:
                     return BuiltinValue(func_val.name, func_val.func, func_val.arity, args)
                 return IntegerValue(func_val.func(*args))
 
-            # Record application
-            if isinstance(func_val, RecordValue):
-                new_env = Environment(parent=func_val.env)
-                if func_val.eager:
-                    new_env.bindings.update(func_val.vals)
-                else:
-                    for name, expr in func_val.exprs.items():
-                        new_env.bindings[name] = Thunk(expr, new_env, self)
-                return self.eval(node.arg, new_env)
-
             # User-defined function
             if isinstance(func_val, FunctionValue):
                 arg_val = self.eval(node.arg, env)
                 new_env = func_val.env.extend(func_val.param, arg_val)
                 return self.eval(func_val.body, new_env)
 
-            raise TypeError('Cannot apply non-function')
+            raise TypeError(f'Cannot apply non-function: {type(func_val)}')
 
         raise TypeError(f'Unknown node: {type(node)}')

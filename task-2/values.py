@@ -27,3 +27,10 @@ class Thunk(Value):
             self._value = self.evaluator.eval(self.stmt, self.env)
             self._done = True
         return self._value
+    
+
+class EnvironmentWrapper(Value):
+    """Wraps a value with an environment context for record applications"""
+    def __init__(self, value, env):
+        self.value = value
+        self.env = env
