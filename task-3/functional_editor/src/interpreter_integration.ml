@@ -1,8 +1,8 @@
-(* Add this to editor.ml or create a new file interpreter_integration.ml *)
+(* interpreter_integration.ml *)
 
 open Types
 
-(** Path to Task 2 interpreter - adjust this path as needed *)
+(** Path to Task 2 interpreter *)
 let interpreter_path = "../../task-2/main.py"
 
 (** Run the current file through the Task 2 interpreter *)

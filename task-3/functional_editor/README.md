@@ -172,7 +172,7 @@ dune exec functional_editor [filename]
 # Create a functional program
 $ dune exec functional_editor example.func
 
-# Edit with syntax highlighting
+# Edit with syntax highlighting with error example
 {
   square = x.mult x x,        # 'mult' highlighted in blue
   result = square 5           # '5' highlighted in cyan
@@ -184,7 +184,7 @@ result
  Running: example.func
 ═══════════════════════════════════════════════
 
-25
+Error: Unbound var: x
 
 ═══════════════════════════════════════════════
  ✓ Program completed successfully
