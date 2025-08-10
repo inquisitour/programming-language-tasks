@@ -14,12 +14,12 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_85b084_output
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_20e409_output
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/main.ml) > _build/default/src/.main.eobjs/dune__exe__Main.impl.d
-$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/interpreter_integration.ml) > _build/default/src/.main.eobjs/dune__exe__Interpreter_integration.impl.d
-$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/syntax.ml) > _build/default/src/.main.eobjs/dune__exe__Syntax.impl.d
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/editor.ml) > _build/default/src/.main.eobjs/dune__exe__Editor.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/syntax.ml) > _build/default/src/.main.eobjs/dune__exe__Syntax.impl.d
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/types.ml) > _build/default/src/.main.eobjs/dune__exe__Types.impl.d
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/interpreter_integration.ml) > _build/default/src/.main.eobjs/dune__exe__Interpreter_integration.impl.d
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/terminal.ml) > _build/default/src/.main.eobjs/dune__exe__Terminal.impl.d
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/file_ops.ml) > _build/default/src/.main.eobjs/dune__exe__File_ops.impl.d
 $ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/lexer.ml) > _build/default/src/.main.eobjs/dune__exe__Lexer.impl.d

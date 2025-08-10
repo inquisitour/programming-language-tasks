@@ -2,7 +2,6 @@
 
 open Types
 
-(** Path to Task 2 interpreter - adjust this path as needed *)
 let interpreter_path = "../../task-2/main.py"
 
 (** Run the current file through the Task 2 interpreter *)

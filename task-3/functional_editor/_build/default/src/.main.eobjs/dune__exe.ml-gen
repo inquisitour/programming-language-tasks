@@ -3,8 +3,14 @@
 (** @canonical Dune__exe.Editor *)
 module Editor = Dune__exe__Editor
 
+(** @canonical Dune__exe.Editor_gadts *)
+module Editor_gadts = Dune__exe__Editor_gadts
+
 (** @canonical Dune__exe.File_ops *)
 module File_ops = Dune__exe__File_ops
+
+(** @canonical Dune__exe.Gadt_types *)
+module Gadt_types = Dune__exe__Gadt_types
 
 (** @canonical Dune__exe.Highlight *)
 module Highlight = Dune__exe__Highlight
@@ -17,6 +23,9 @@ module Lexer = Dune__exe__Lexer
 
 (** @canonical Dune__exe.Main *)
 module Main = Dune__exe__Main
+
+(** @canonical Dune__exe.Practical_gadts *)
+module Practical_gadts = Dune__exe__Practical_gadts
 
 (** @canonical Dune__exe.Syntax *)
 module Syntax = Dune__exe__Syntax
