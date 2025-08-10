@@ -213,7 +213,7 @@ dune exec functional_editor example.func       # Open file
 
 - **📖 [Task 1: Post-fix Calculator](task-1/README.md)** - Complete implementation with full testing
 - **📖 [Task 2: Functional Interpreter](task-2/README.md)** - Complete implementation with full testing
-- **📖 [Task 3: Syntax Editor](task-3/README.md)** - Complete implementation with IDE features
+- **📖 [Task 3: Syntax Editor](task-3/functional_editor/README.md)** - Complete implementation with IDE features
 
 ## Testing
 
