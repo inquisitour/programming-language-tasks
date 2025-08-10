@@ -1,5 +1,5 @@
 (lang dune 3.18)
 (name functional_editor)
 (version 0.1.0)
-(sections (lib .) (bin ../../bin))
-(files (lib (META dune-package)) (bin (functional_editor)))
+(sections (lib .) (bin ../../bin) (doc ../../doc/functional_editor))
+(files (lib (META dune-package)) (bin (functional_editor)) (doc (README.md)))

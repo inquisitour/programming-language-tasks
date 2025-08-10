@@ -1,4 +1,4 @@
-(* Add this to editor.ml or create a new file interpreter_integration.ml *)
+(* interpreter_integration.ml *)
 
 open Types
 
