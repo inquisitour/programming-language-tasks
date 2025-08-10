@@ -172,7 +172,7 @@ dune exec functional_editor test/[filename]
 # Create a functional program
 $ dune exec functional_editor test/example.func
 
-# Edit with syntax highlighting and error catching
+# Edit with syntax highlighting with error example
 {
   square = x.mult x x,        # 'mult' highlighted in blue
   result = square 5           # '5' highlighted in cyan
