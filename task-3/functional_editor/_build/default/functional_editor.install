@@ -1,0 +1,10 @@
+lib: [
+  "_build/install/default/lib/functional_editor/META"
+  "_build/install/default/lib/functional_editor/dune-package"
+]
+bin: [
+  "_build/install/default/bin/functional_editor"
+]
+doc: [
+  "_build/install/default/doc/functional_editor/README.md"
+]
