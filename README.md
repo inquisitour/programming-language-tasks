@@ -136,7 +136,7 @@ dune build
 
 # Run the editor
 dune exec functional_editor                    # New file
-dune exec functional_editor example.func       # Open file
+dune exec functional_editor test/[filename]    # Open file
 
 # Test integrated execution
 # 1. Open a .func file
@@ -200,7 +200,7 @@ dune exec functional_editor example.func       # Open file
 │   │   │   ├── editor.ml       # Editor core
 │   │   │   ├── interpreter_integration.ml # Execution feature
 │   │   │   └── main.ml         # Entry point
-│   │   └── examples/           # Test files
+│   │   └── test/           # Test files
 │   │       ├── basic.func      # Simple arithmetic
 │   │       ├── square.func     # Lambda function
 │   │       └── complex.func    # Records example
