@@ -1,0 +1,12 @@
+(lang dune 3.0)
+(name functional_editor)
+(version 0.1.0)
+
+(package
+ (name functional_editor)
+ (synopsis "Syntax-aware editor for functional language")
+ (description "A terminal-based editor with syntax highlighting for the functional language from Task 2")
+ (depends
+  ocaml
+  dune
+  ANSITerminal))

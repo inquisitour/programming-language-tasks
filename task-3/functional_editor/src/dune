@@ -1,0 +1,5 @@
+(executable
+ (public_name functional_editor)
+ (name main)
+ (modules types terminal file_ops lexer syntax highlight editor interpreter_integration main)
+ (libraries ANSITerminal unix))
