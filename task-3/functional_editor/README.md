@@ -146,7 +146,7 @@ cd task-3/functional_editor
 dune build
 
 # Run
-dune exec functional_editor [filename]
+dune exec functional_editor test/[filename]
 ```
 
 ### Keyboard Shortcuts
@@ -170,9 +170,9 @@ dune exec functional_editor [filename]
 
 ```bash
 # Create a functional program
-$ dune exec functional_editor example.func
+$ dune exec functional_editor test/example.func
 
-# Edit with syntax highlighting
+# Edit with syntax highlighting and error catching
 {
   square = x.mult x x,        # 'mult' highlighted in blue
   result = square 5           # '5' highlighted in cyan
@@ -181,10 +181,10 @@ result
 
 # Press Ctrl-R to run
 ═══════════════════════════════════════════════
- Running: example.func
+ Running: test/example.func
 ═══════════════════════════════════════════════
 
-25
+Error: Unbound var: x
 
 ═══════════════════════════════════════════════
  ✓ Program completed successfully
@@ -209,7 +209,7 @@ task-3/
 │   │   ├── editor.ml        # Editor core
 │   │   ├── interpreter_integration.ml # Run feature
 │   │   └── main.ml          # Main entry point
-│   └── examples/            # Test files
+│   └── test/            # Test files
 │       ├── basic.func       # Simple arithmetic
 │       ├── square.func      # Lambda function
 │       └── complex.func     # Records example
