@@ -101,7 +101,7 @@ python test_comprehensive.py       # Full test suite
 
 ## Task 3: Syntax-aware Editor ✅ COMPLETED
 
-**📖 [View Task 3 Documentation](task-3/README.md)**
+**📖 [View Task 3 Documentation](task-3/functional_editor/README.md)**
 
 ### Description
 A terminal-based syntax-aware editor for the Task 2 functional language, built in OCaml with real-time syntax highlighting, error detection, and integrated program execution.
