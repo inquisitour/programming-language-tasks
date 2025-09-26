@@ -5,6 +5,7 @@ LVA 185.208 Programming Languages - Task 1
 """
 
 import sys
+import charcounter
 from typing import Union, List, Dict, Any
 
 Value = Union[int, float, str]
@@ -16,6 +17,11 @@ class Calculator:
         self.operation_mode = 0  # 0: execution, -1: int construction, <-1: decimal places, >0: string construction
         self.data_stack: List[Value] = []
         self.registers: Dict[str, Value] = {}
+        self.charcounter = charcounter.Charcounter()
+        self.right_aligned = True
+        self.is_empty = True
+        self.in_parentheses = False
+        self.word = False
         
         # Initialize registers with default values
         self._init_registers()
@@ -321,7 +327,58 @@ class Calculator:
         
         # String construction mode (>0)
         elif self.operation_mode > 0:
-            if char == '(':
+            if self.word:
+                if not self.charcounter.is_word_counted:
+                    self.charcounter.increase_wordnumber()
+                    self.charcounter.is_word_counted = True
+                self.charcounter.check_char(char)
+
+                if not self.data_stack:
+                    self.error("No string on stack for string construction")
+                    return
+                top = self.pop()
+                if not isinstance(top, str):
+                    self.error("Top of stack must be string in string construction mode")
+                    return
+
+                # Check if character is not part of the reversed string
+                self.right_aligned = False
+                if not ((char in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') | char.isdigit()):
+                    self.right_aligned = True
+                    self.charcounter.is_word_counted = False
+
+                if len(self.command_stream) == 0:
+                    # End of line
+                    if self.right_aligned:
+                        right_side = top + char
+                    else:
+                        right_side = char + top
+                    left_side = self.pop()
+                    self.push(left_side + right_side)
+                    self.is_empty = True
+                    self.charcounter.is_word_counted = False
+                    return
+                if self.right_aligned:
+                    self.push(top + char)
+                    if not self.is_empty:
+                        self.pop()
+                        if self.right_aligned:
+                            right_side = top + char
+                        else:
+                            right_side = char + top
+                        left_side = self.pop()
+                        self.push(left_side + right_side)
+                        self.push('')
+                        return
+                    else:
+                        self.push('')
+                        self.is_empty = False
+                else:
+                    self.push(char + top)
+                return
+
+            elif char == '(':
+                self.in_parentheses = True
                 if not self.data_stack:
                     self.error("No string on stack for string construction")
                     return
@@ -333,6 +390,7 @@ class Calculator:
                 self.operation_mode += 1
                 return
             elif char == ')':
+                self.in_parentheses = False
                 if not self.data_stack:
                     self.error("No string on stack for string construction")
                     return
@@ -348,6 +406,9 @@ class Calculator:
                     self.push(top)
                 self.operation_mode -= 1
                 return
+            elif char == ' ':
+                self.word = False
+                self.operation_mode = 0
             else:
                 # Add character to string
                 if not self.data_stack:
@@ -359,8 +420,19 @@ class Calculator:
                     return
                 self.push(top + char)
                 return
-        
+
+        self.word = False
+
         # Execution mode (0)
+        if (((char in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+            & (len(self.command_stream)>0))):
+            if (self.command_stream[0] in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') | (not self.in_parentheses):
+                self.push(char)
+                self.charcounter.check_char(char)
+                self.operation_mode = 1
+                self.word = True
+                return
+
         if char.isdigit():
             self.push(int(char))
             self.operation_mode = -1
@@ -527,6 +599,8 @@ class Calculator:
         while True:
             try:
                 line = input("> ").strip()
+                self.word = False
+                self.operation_mode = 0
                 if line.lower() == 'quit':
                     break
                 elif line.lower() == 'stack':
@@ -541,6 +615,9 @@ class Calculator:
                     self.run()
                     self.command_stream = old_stream
                     print(f"Stack: {self.data_stack}")
+                    if self.charcounter.check_word_presence():
+                        print(self.charcounter.print_charcounter())
+                        self.charcounter.reset_all()
             except KeyboardInterrupt:
                 break
             except EOFError:
